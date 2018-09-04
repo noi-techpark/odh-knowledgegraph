@@ -1,0 +1,491 @@
+@prefix : <http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism> a owl:Ontology ;
+	rdfs:comment "A tourist holiday enquiry ontology that describes where tourist of South Tyrol come from, and in which period they want to stay."@en .
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#belongsTo
+
+:belongsTo a owl:ObjectProperty ;
+	rdfs:subPropertyOf :relational_property ;
+	owl:inverseOf :contains ;
+	a owl:FunctionalProperty ;
+	rdfs:domain :Location ;
+	rdfs:range :Location .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#contains
+
+:contains a owl:ObjectProperty ;
+	rdfs:subPropertyOf :relational_property .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#hasCategory
+
+:hasCategory a owl:ObjectProperty ;
+	rdfs:subPropertyOf :relational_property ;
+	a owl:FunctionalProperty ;
+	rdfs:domain :Enquiry ;
+	rdfs:range :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#hasDestination
+
+:hasDestination a owl:ObjectProperty ;
+	rdfs:subPropertyOf :relational_property ;
+	a owl:FunctionalProperty ;
+	rdfs:domain :Enquiry ;
+	rdfs:range :CityOrTown .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#isCategory
+
+:isCategory a owl:ObjectProperty ;
+	rdfs:subPropertyOf :modifier_property ;
+	a owl:FunctionalProperty ;
+	rdfs:domain :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#modifier_property
+
+:modifier_property a owl:ObjectProperty .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#relational_property
+
+:relational_property a owl:ObjectProperty .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#submittedFrom
+
+:submittedFrom a owl:ObjectProperty ;
+	rdfs:subPropertyOf :relational_property ;
+	a owl:FunctionalProperty ;
+	rdfs:domain :Enquiry ;
+	rdfs:range :Country .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Data properties
+# #
+# #################################################################
+# 
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#arrivaldate
+
+:arrivaldate a owl:DatatypeProperty ;
+	rdfs:domain :Enquiry ;
+	rdfs:range xsd:dateTime .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#departuredate
+
+:departuredate a owl:DatatypeProperty ;
+	rdfs:domain :Enquiry ;
+	rdfs:range xsd:dateTime .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#duration
+
+:duration a owl:DatatypeProperty ;
+	rdfs:domain :Enquiry ;
+	rdfs:range xsd:positiveInteger .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#isPartOf
+
+:isPartOf a owl:DatatypeProperty .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#name
+
+:name a owl:DatatypeProperty , owl:FunctionalProperty ;
+	rdfs:range xsd:string .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#name_de
+
+:name_de a owl:DatatypeProperty ;
+	rdfs:subPropertyOf :name .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#name_it
+
+:name_it a owl:DatatypeProperty ;
+	rdfs:subPropertyOf :name .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#name_lad
+
+:name_lad a owl:DatatypeProperty ;
+	rdfs:subPropertyOf :name .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#noOfAdults
+
+:noOfAdults a owl:DatatypeProperty ;
+	rdfs:domain :Enquiry ;
+	rdfs:range xsd:positiveInteger .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#noOfChildren
+
+:noOfChildren a owl:DatatypeProperty ;
+	rdfs:domain :Enquiry ;
+	rdfs:range xsd:nonNegativeInteger .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#submissiondate
+
+:submissiondate a owl:DatatypeProperty ;
+	rdfs:domain :Enquiry ;
+	rdfs:range xsd:dateTime .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Category
+
+:Category a owl:Class .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#CityOrTown
+
+:CityOrTown a owl:Class ;
+	owl:equivalentClass :Destination ;
+	rdfs:subClassOf :TouristicDistricts .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Continent
+
+:Continent a owl:Class ;
+	rdfs:subClassOf :Location .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Country
+
+:Country a owl:Class ;
+	rdfs:subClassOf :Continent .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Destination
+
+:Destination a owl:Class .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Enquiry
+
+:Enquiry a owl:Class ;
+	rdfs:subClassOf :TouristAction , _:genid1 .
+
+_:genid1 a owl:Restriction ;
+	owl:onProperty :hasCategory ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass :Category .
+
+:Enquiry rdfs:subClassOf _:genid2 .
+
+_:genid2 a owl:Restriction ;
+	owl:onProperty :submittedFrom ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onClass :Country .
+
+:Enquiry rdfs:subClassOf _:genid3 .
+
+_:genid3 a owl:Restriction ;
+	owl:onProperty :arrivaldate ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onDataRange owl:rational .
+
+:Enquiry rdfs:subClassOf _:genid4 .
+
+_:genid4 a owl:Restriction ;
+	owl:onProperty :departuredate ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onDataRange owl:rational .
+
+:Enquiry rdfs:subClassOf _:genid5 .
+
+_:genid5 a owl:Restriction ;
+	owl:onProperty :duration ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onDataRange owl:rational .
+
+:Enquiry rdfs:subClassOf _:genid6 .
+
+_:genid6 a owl:Restriction ;
+	owl:onProperty :noOfAdults ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onDataRange owl:rational .
+
+:Enquiry rdfs:subClassOf _:genid7 .
+
+_:genid7 a owl:Restriction ;
+	owl:onProperty :noOfChildren ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onDataRange owl:rational .
+
+:Enquiry rdfs:subClassOf _:genid8 .
+
+_:genid8 a owl:Restriction ;
+	owl:onProperty :submissiondate ;
+	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+	owl:onDataRange owl:rational .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Farm
+
+:Farm a owl:Class ;
+	rdfs:subClassOf :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#FarmEnquiry
+
+:FarmEnquiry a owl:Class ;
+	owl:equivalentClass _:genid9 .
+
+_:genid9 owl:intersectionOf _:genid12 .
+
+_:genid12 a rdf:List ;
+	rdf:first :Enquiry ;
+	rdf:rest _:genid10 .
+
+_:genid10 a rdf:List ;
+	rdf:first _:genid11 .
+
+_:genid11 a owl:Restriction ;
+	owl:onProperty :isCategory ;
+	owl:allValuesFrom :Farm .
+
+_:genid10 rdf:rest rdf:nil .
+
+_:genid9 a owl:Class .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Garni
+
+:Garni a owl:Class ;
+	owl:equivalentClass :Hotel ;
+	rdfs:subClassOf :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Hotel
+
+:Hotel a owl:Class ;
+	owl:equivalentClass :Pension , :Pub , :Residence ;
+	rdfs:subClassOf :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Hotel123
+
+:Hotel123 a owl:Class ;
+	rdfs:subClassOf :Hotel ;
+	owl:disjointWith :Hotel45 .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Hotel123Enquiry
+
+:Hotel123Enquiry a owl:Class ;
+	owl:equivalentClass _:genid13 .
+
+_:genid13 owl:intersectionOf _:genid16 .
+
+_:genid16 a rdf:List ;
+	rdf:first :HotelEnquiry ;
+	rdf:rest _:genid14 .
+
+_:genid14 a rdf:List ;
+	rdf:first _:genid15 .
+
+_:genid15 a owl:Restriction ;
+	owl:onProperty :isCategory ;
+	owl:allValuesFrom :Hotel123 .
+
+_:genid14 rdf:rest rdf:nil .
+
+_:genid13 a owl:Class .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Hotel45
+
+:Hotel45 a owl:Class ;
+	rdfs:subClassOf :Hotel .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Hotel45Enquiry
+
+:Hotel45Enquiry a owl:Class ;
+	owl:equivalentClass _:genid17 .
+
+_:genid17 owl:intersectionOf _:genid20 .
+
+_:genid20 a rdf:List ;
+	rdf:first :HotelEnquiry ;
+	rdf:rest _:genid18 .
+
+_:genid18 a rdf:List ;
+	rdf:first _:genid19 .
+
+_:genid19 a owl:Restriction ;
+	owl:onProperty :isCategory ;
+	owl:allValuesFrom :Hotel45 .
+
+_:genid18 rdf:rest rdf:nil .
+
+_:genid17 a owl:Class .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#HotelEnquiry
+
+:HotelEnquiry a owl:Class ;
+	rdfs:subClassOf :Enquiry ;
+	owl:disjointUnionOf _:genid22 .
+
+_:genid22 a rdf:List ;
+	rdf:first :Hotel123Enquiry ;
+	rdf:rest _:genid21 .
+
+_:genid21 a rdf:List ;
+	rdf:first :Hotel45Enquiry ;
+	rdf:rest rdf:nil .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#LadinTown
+
+:LadinTown a owl:Class ;
+	rdfs:subClassOf :CityOrTown .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Location
+
+:Location a owl:Class .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#OtherAccommodation
+
+:OtherAccommodation a owl:Class ;
+	rdfs:subClassOf :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#OtherAccommodationEnquiry
+
+:OtherAccommodationEnquiry a owl:Class ;
+	owl:equivalentClass _:genid23 .
+
+_:genid23 owl:intersectionOf _:genid26 .
+
+_:genid26 a rdf:List ;
+	rdf:first :Enquiry ;
+	rdf:rest _:genid24 .
+
+_:genid24 a rdf:List ;
+	rdf:first _:genid25 .
+
+_:genid25 a owl:Restriction ;
+	owl:onProperty :isCategory ;
+	owl:allValuesFrom :OtherAccommodation .
+
+_:genid24 rdf:rest rdf:nil .
+
+_:genid23 a owl:Class .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Pension
+
+:Pension a owl:Class ;
+	rdfs:subClassOf :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Private
+
+:Private a owl:Class ;
+	rdfs:subClassOf :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#PrivateEnquiry
+
+:PrivateEnquiry a owl:Class ;
+	owl:equivalentClass _:genid27 .
+
+_:genid27 owl:intersectionOf _:genid30 .
+
+_:genid30 a rdf:List ;
+	rdf:first :Enquiry ;
+	rdf:rest _:genid28 .
+
+_:genid28 a rdf:List ;
+	rdf:first _:genid29 .
+
+_:genid29 a owl:Restriction ;
+	owl:onProperty :isCategory ;
+	owl:allValuesFrom :Private .
+
+_:genid28 rdf:rest rdf:nil .
+
+_:genid27 a owl:Class .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Province
+
+:Province a owl:Class ;
+	rdfs:subClassOf :Country .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Pub
+
+:Pub a owl:Class ;
+	rdfs:subClassOf :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Residence
+
+:Residence a owl:Class ;
+	rdfs:subClassOf :Category .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#TouristAction
+
+:TouristAction a owl:Class .
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#TouristicDistricts
+
+:TouristicDistricts a owl:Class ;
+	rdfs:subClassOf :Province .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Individuals
+# #
+# #################################################################
+# 
+# 
+# http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#Farms
+
+:Farms a owl:NamedIndividual .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    General axioms
+# #
+# #################################################################
+# 
+# 
+
+_:genid31 a owl:AllDisjointClasses ;
+	owl:members _:genid34 .
+
+_:genid34 a rdf:List ;
+	rdf:first :Category ;
+	rdf:rest _:genid33 .
+
+_:genid33 a rdf:List ;
+	rdf:first :Location ;
+	rdf:rest _:genid32 .
+
+_:genid32 a rdf:List ;
+	rdf:first :TouristAction ;
+	rdf:rest rdf:nil .
+# 
+
+_:genid35 a owl:AllDisjointClasses ;
+	owl:members _:genid39 .
+
+_:genid39 a rdf:List ;
+	rdf:first :Farm ;
+	rdf:rest _:genid38 .
+
+_:genid38 a rdf:List ;
+	rdf:first :Hotel ;
+	rdf:rest _:genid37 .
+
+_:genid37 a rdf:List ;
+	rdf:first :OtherAccommodation ;
+	rdf:rest _:genid36 .
+
+_:genid36 a rdf:List ;
+	rdf:first :Private ;
+	rdf:rest rdf:nil .
+# 
+# Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi

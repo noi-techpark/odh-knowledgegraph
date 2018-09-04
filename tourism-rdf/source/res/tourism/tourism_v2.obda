@@ -1,0 +1,97 @@
+[PrefixDeclaration]
+:		http://www.semanticweb.org/pemoser/ontologies/2017/0/tourism#
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+xml:		http://www.w3.org/XML/1998/namespace
+xsd:		http://www.w3.org/2001/XMLSchema#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+
+[SourceDeclaration]
+sourceUri	datasource1
+connectionUrl	jdbc:postgresql://localhost:5432/postgres
+username	postgres
+password	qwertz
+driverClass	org.postgresql.Driver
+
+[MappingDeclaration] @collection [[
+mappingId	cl_PrivateEnquiry
+target		:enquiry/{enquiryid}/ a :PrivateEnquiry ; :noOfChildren {children} ; :noOfAdults {adults} ; :duration {duration} ; :departuredate {departuredate} ; :arrivaldate {arrivaldate} ; :submissiondate {submittedondate} . 
+source		select enquiryid, children, adults, duration, departuredate, arrivaldate, submittedondate from enquiry_fact where categoryid = 3
+
+mappingId	cl_Category
+target		:category/{categoryid} a :Category ; :name {category} . 
+source		select categoryid, category from category_dimension
+
+mappingId	op_hasCategory
+target		:enquiry/{enquiryid} :hasCategory :category/{categoryid} . 
+source		select categoryid, enquiryid from enquiry_fact
+
+mappingId	op_hasDestination
+target		:enquiry/{enquiryid} :hasDestination :destination/{destinationid} . 
+source		select destinationid, enquiryid from enquiry_fact
+
+mappingId	cl_CityOrTown
+target		:destination/{destinationid} a :Destination ; :name_de {name_de} ; :name_it {name_it} ; :name_lad {name_lad} ; :isPartOf {district} . 
+source		select destinationid, name_de, name_it, name_lad, district from destination_dimension;
+
+mappingId	op_belongsTo
+target		:destination/{destinationid} :belongsTo :destination/{district} . 
+source		select destinationid, district from destination_dimension
+
+mappingId	cl_Country
+target		:country/{countrycode} a :Country ; :name {countryname} ; :isPartOf {continentcode} . 
+source		select countrycode, countryname, continentcode from country_dimension
+
+mappingId	cl_Continent
+target		:continent/{continentcode} a :Continent ; :name {continentname} . 
+source		select continentname, continentcode from country_dimension
+
+mappingId	cl_LadinTown
+target		:destination/{destinationid} a :LadinTown ; :name {name_lad} . 
+source		select destinationid, name_lad from destination_dimension where name_lad is not null
+
+mappingId	op_submittedFrom
+target		:enquiry/{enquiryid} :submittedFrom :country/{countrycode} . 
+source		select countrycode, enquiryid from enquiry_fact
+
+mappingId	cl_Category_Hotel45
+target		:category/{categoryid} a :Hotel45 ; :name {category} . 
+source		select categoryid, category from category_dimension where categoryid = 2;
+
+mappingId	cl_Category_Hotel123
+target		:category/{categoryid} a :Hotel123 ; :name {category} . 
+source		select categoryid, category from category_dimension where categoryid = 1;
+
+mappingId	cl_Category_Private
+target		:category/{categoryid} a :Private ; :name {category} . 
+source		select categoryid, category from category_dimension where categoryid = 3;
+
+mappingId	cl_Category_OtherAccommodation
+target		:category/{categoryid} a :OtherAccommodation ; :name {category} . 
+source		select categoryid, category from category_dimension where categoryid = 5;
+
+mappingId	cl_Category_Farm
+target		:category/{categoryid} a :Farm ; :name {category} . 
+source		select categoryid, category from category_dimension where categoryid = 4;
+
+mappingId	cl_Hotel45Enquiry
+target		:enquiry/{enquiryid} a :Hotel45Enquiry ; :noOfChildren {children} ; :noOfAdults {adults} ; :duration {duration} ; :departuredate {departuredate} ; :arrivaldate {arrivaldate} ; :submissiondate {submittedondate} . 
+source		select enquiryid, children, adults, duration, departuredate, arrivaldate, submittedondate from enquiry_fact where categoryid = 2
+
+mappingId	cl_Hotel123Enquiry
+target		:enquiry/{enquiryid} a :Hotel123Enquiry ; :noOfChildren {children} ; :noOfAdults {adults} ; :duration {duration} ; :departuredate {departuredate} ; :arrivaldate {arrivaldate} ; :submissiondate {submittedondate} . 
+source		select enquiryid, children, adults, duration, departuredate, arrivaldate, submittedondate from enquiry_fact where categoryid = 1
+
+mappingId	cl_FarmEnquiry
+target		:enquiry/{enquiryid} a :FarmEnquiry ; :noOfChildren {children} ; :noOfAdults {adults} ; :duration {duration} ; :departuredate {departuredate} ; :arrivaldate {arrivaldate} ; :submissiondate {submittedondate} . 
+source		select enquiryid, children, adults, duration, departuredate, arrivaldate, submittedondate from enquiry_fact where categoryid = 4
+
+mappingId	cl_OtherAccommodationEnquiry
+target		:enquiry/{enquiryid} a :OtherAccommodationEnquiry ; :noOfChildren {children} ; :noOfAdults {adults} ; :duration {duration} ; :departuredate {departuredate} ; :arrivaldate {arrivaldate} ; :submissiondate {submittedondate} . 
+source		select enquiryid, children, adults, duration, departuredate, arrivaldate, submittedondate from enquiry_fact where categoryid = 5
+
+mappingId	cl_HotelEnquiry
+target		:enquiry/{enquiryid} a :HotelEnquiry ; :noOfChildren {children} ; :noOfAdults {adults} ; :duration {duration} ; :departuredate {departuredate} ; :arrivaldate {arrivaldate} ; :submissiondate {submittedondate} . 
+source		select enquiryid, children, adults, duration, departuredate, arrivaldate, submittedondate from enquiry_fact where categoryid = 1 or categoryid = 2
+]]
+

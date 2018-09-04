@@ -1,0 +1,60 @@
+Postgres setup
+    - https://wiki.postgresql.org/wiki/First_steps
+    - Created user and password + granted access to db and tables
+    - import of projects/tourism-rdf/sql/tourism.sql
+    - server runs on localhost:5432
+    
+h2-ekaw setup
+    - download and extract h2 from https://github.com/ontop/ontop-examples/tree/master/ekaw-tutorial-2016/session1
+    - cd bin; ./h2.sh > opens a browser window to configure connections
+    - Error: Class "org.postgresql.Driver" not found [90086-176]
+        - Download jdbc driver from https://jdbc.postgresql.org/download.html
+        - Check java -version first (for jvm 1.8 we need JDBC42)
+        - sudo mv postgresql-9.4.1212.jar /usr/local/lib/
+        - export H2DRIVERS=/usr/local/lib/postgresql-9.4.1212.jar
+        - ./h2.sh: Generic PostgreSQL; Generic PostgreSQL; org.postgresql.Driver; jdbc:postgresql:<database> for ex.
+          jdbc:postgresql:postgres; user; pass
+
+RDBMS to RDF Mappings (Bootstrapping)
+    - Download: https://sourceforge.net/projects/ontop4obda/files/ontop-1.18.0/ontop-distribution-1.18.0.1.zip/download
+    - Error: java.sql.SQLException: No suitable driver found for jdbc:postgresql:postgres
+        - cp /usr/local/lib/postgresql-9.4.1212.jar jdbc/
+    - ./ontop bootstrap -b tourism -d org.postgresql.Driver -l jdbc:postgresql:postgres \
+      -p <password> -u <user> -m out.obda -t owl
+    - Manually deleted "dataraw" and "dataclean" fields inside out.obda and out.owl 
+    - See new files at /home/pemoser/projects/tourism-rdf/ontology/tourism.obda|owl
+    
+Create Ontology with Protege
+    - Quick Start Guide: http://protegewiki.stanford.edu/wiki/Protege4GettingStarted
+    - Tutorial for Beginners: http://protegewiki.stanford.edu/wiki/Protege4Pizzas10Minutes
+
+    - Start protege: 
+        - ./software/protege-5.0.0/run.sh 
+        - Open file tourism_v2.owl with protege
+    
+    - Database Connection SETUP:
+        - Issue with JDBC: No tab under File>Preferences and no suitable driver for PG found
+            - Solution: Reset configuration...
+            - Restart Protege
+            - https://github.com/ontop/ontop/wiki/ontopProInstallation#setting-up-the-jdbc-drivers-in-protege
+            - Choose JDBC driver inside ontop-folder/jdbc
+        - Ontop Mappings > Datasource Manager
+          jdbc:postgresql://localhost:5432/postgres
+          pemoser
+          ......
+          org.postgresql.Driver
+          
+          
+          https://github.com/ontop/ontop/wiki/attachments/BookTutorial/exampleBooks.obda
+          https://github.com/ontop/ontop/wiki/BookTutorial
+          
+      
+Create an SPARQL endpoint
+    - https://github.com/ontop/ontop/wiki/Sesame-SPARQL-endpoint-installation
+    - No suitable driver found for jdbc:postgresql://....
+      You need to copy the corresponding JDBC driver into $JETTY_HOME/lib/ext. 
+    
+
+
+
+

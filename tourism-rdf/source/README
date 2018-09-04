@@ -1,0 +1,16 @@
+Install libjava-gnome-java, otherwise you will get an error like:
+
+	Exception in thread "main" java.lang.UnsatisfiedLinkError: 
+
+	We anticipated loading the native portion of java-gnome from:
+	/usr/lib/jni/libgtkjni-4.1.3.so
+	but didn't find the library there.
+
+		at org.freedesktop.bindings.Plumbing.loadNativeCode(Plumbing.java:205)
+		at org.freedesktop.bindings.Plumbing.<clinit>(Plumbing.java:110)
+		at org.gnome.gtk.Gtk.init(Gtk.java:95)
+		at semanticdw.Main.main(Main.java:142)
+
+
+Execute
+	sudo apt-get install libjava-gnome-java

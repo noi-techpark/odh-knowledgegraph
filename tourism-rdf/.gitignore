@@ -1,0 +1,5 @@
+*.class
+source/target/classes
+source/.settings/
+*.glade~
+hs_err_pid*
