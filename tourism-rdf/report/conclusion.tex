@@ -1,0 +1,12 @@
+% !TeX spellcheck = en_US
+
+\section{Conclusion and Future work}
+\label{chapter:conclusion}
+
+This project could be extended in several ways. First, it would be nice to incorporate a non-semantic drill down and drill up view upon the data warehouse with standard OLAP SQL queries.
+
+Then, for each dimension, it would be nice to have a functionality to define mappings to external SPARQL endpoints, depending on an ontology class hierarchy defined with ONTOP and PROTEGE. For example, defining an ontology for the destination dimension to find new attributes for them. A SPARQL connection to the ISTAT, DBPEDIA, and other endpoints could be defined to explore the connected ontologies first. Then, after deciding upon an attribute (for instance, elevation of a town), an additional mapping could define how to extend the relational database. The semantic techniques would hereby help to find new ideas, and available data and semantic connections between concepts in the real-world.
+
+Last, a completeness measure would be needed to see how many tuples of a dimension could be filled with a predefined mapping. For instance, if some towns do not have an \textit{elevation} defined, or if the mappings are not uniquely defined and some towns have more than one \textit{elevation} to be assigned. 
+
+In general, during my development I had some ideas about how semantic technologies could help data warehouse designers to make the best out of their business. However, it is not easy to combine different ontologies (and SPARQL endpoints) in technical and semantical (i.e., missing in-common IRIs) sense. Nevertheless, I liked this project a lot, because it gave me new insights in how-to explore an area with querying tools, and how close philosophical and technical worlds can come.

@@ -1,0 +1,30 @@
+% !TeX spellcheck = en_US
+
+\section{Architecture of the System}
+\label{chapter:architecture}
+
+This system's architecture is made of four components: First, a PostgreSQL database to store the fact table and dimension tables. The schema of these tables have already been explained in Chap.~\ref{chapter:schema}. Second, an \textsc{Ontop} platform to query this relational database as a virtual RDF graph. Hereby, I generated an OWL file, to describe the ontology graph with its data properties, object properties, and classes. At the same time, I generated an OBDA file to define the data connection parameters to PostgreSQL, and to describe the mappings from a given SPARQL query to its SQL counterpart. Both files have been build with the \textsc{Prot\'eg\'e} ontology graph editor. Third, the \textsc{rdf4j} library (formerly known as Sesame) to connect to and query RDF data. The connection has been made to \textit{\url{http://dbpedia.org}}. 
+
+The reason to have this simple architecture is that I tried several other things before, to find out, that not all things are currently possible that I wanted to use for this project. However, it was interesting to try and see all the possibilities and restrictions that exists currently. 
+
+\subsection{Trials and errors}
+With this chapter I want to address the report requirement: \textit{Lessons learned from the project / advantages and drawbacks of the
+semantic technologies}.
+
+During the development I tried to integrate both data sources, namely the local tourism ontology, and the remote dbpedia SPARQL endpoint, into a single federation setup. I installed \textsc{Jetty} and the \textsc{OpenRDF workbench} for it. Then, I configured the mentioned sources as two SPARQL endpoints. In addition, I wanted to generated a \textit{Federation Store}. However, it did not work, since I got two errors. First, an \textit{Virtuoso Error: No permission} to select a certain table. Unfortunately, I can not reproduce this error while writing the report. Hence, I cannot provide more details. Second, the following Java exception:
+\begin{lstlisting}[language=]
+org.openrdf.repository.RepositoryException: org.openrdf.repository.RepositoryException: Unable to get namespaces from Sail
+	at org.openrdf.http.client.HTTPClient.handleHTTPError(HTTPClient.java:953)
+	at org.openrdf.http.client.HTTPClient.sendTupleQueryViaHttp(HTTPClient.java:718)
+	at org.openrdf.http.client.HTTPClient.getTupleQueryResult(HTTPClient.java:643)
+	at org.openrdf.http.client.SesameHTTPClient.getNamespaces(SesameHTTPClient.java:321)
+	at org.openrdf.http.client.SesameHTTPClient.getNamespaces(SesameHTTPClient.java:302)
+	...
+\end{lstlisting}
+
+Afterwards, I thought of keeping both endpoints separate, and use the \texttt{SERVICE} keyword to integrate both sources into a single query, but again, I got a \textit{not supported} error message.
+\begin{lstlisting}[language=]
+Query evaluation error: it.unibz.inf.ontop.model.OBDAException: Error rewriting and unfolding into SQL 
+\end{lstlisting}
+
+The third idea I had, was to reproduce data warehouse operations, such as drill down and drill up. Unfortunately, I got the error from \textsc{Ontop}, that aggregation and grouping is currently not supported. Therefore, I thought of retrieving all data and grouping it in Java. However, the data is huge, and therefore these operations take some time calculating. I found out, that these clauses are part of SPARQL v1.1. In contrast, \textsc{Ontop} supports SPARQL v1.0 only. The aggregation algorithm I wrote in Java is a simple sort-hash-algorithm. That is, I restrict the data input such that every attribute must be sorted. Then, I scan through the input data and build groups from the first attribute to the last. As long as a group stays the same I increment a counter, if the group changes the output tuple is made by writing all group members and the counter, and the counter is afterwards set to zero. All the hash techniques are handled by \texttt{java.util.HashMap}. Finally, if the input is not sorted an error exception is thrown, and all calculations stopped.

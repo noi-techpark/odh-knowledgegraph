@@ -1,0 +1,56 @@
+% !TeX spellcheck = en_US
+% This is a derived work from 
+% http://en.wikibooks.org/wiki/LaTeX/Title_Creation#A_practical_example
+
+\begin{titlepage}
+\begin{center}
+
+\includegraphics[width=0.15\textwidth]{img/unibz-logo.pdf}
+~\\[1cm]
+\textsc{\LARGE Free University of Bolzano/Bozen}
+\\[1.5cm]
+\textsc{\Large Report for the Course \\ Semantic Technologies}
+\\[0.5cm]
+
+% Title
+\HRule{0.5pt} 
+\\[0.4cm]
+{ 
+	\huge 
+	\bfseries 
+	Semantic Techniques to find new dimensions and attributes for a Tourist Inquiry Data Warehouse
+	\\[0.4cm] 
+}
+\HRule{2pt} 
+\\[1.5cm]
+
+% Author and supervisor
+\noindent
+\begin{minipage}[t][][b]{0.4\textwidth}
+	\begin{flushleft} \large
+		\emph{Authors:}\\
+		Peter \textsc{Moser}
+	\end{flushleft}
+\end{minipage}%
+\begin{minipage}[t][][b]{0.4\textwidth}
+	\begin{flushright} \large
+		\emph{Submitted to:} \\
+		Prof.~Enrico \textsc{Franconi}, Dr.~Guohui \textsc{Xiao}
+	\end{flushright}
+\end{minipage}
+
+
+\vspace{.8cm}
+
+{\large \today}
+
+% Bottom of the page
+\vfill
+
+\HRule{0.1pt} 
+\begin{flushleft}
+This report shows the design, implementation, and queries of a tourist inquiries data warehouse through a semantic data model. In detail it contains, first, a domain analysis with defined business goals, a conceptual design with dimensions, facts, and a star schema, second, the architecture of the system with explored possibilities and failures, third, I explain the semantic techniques and ontology used. Finally, I present a Java application, with which an user can query the ontology in two ways: First, by writing a SPARQL query to retrieve data from a tourist inquiries ontology via the ONTOP framework, and second, to query a remote SPARQL endpoint through rdf4j.  
+\end{flushleft}
+\HRule{0.1pt}
+\end{center}
+\end{titlepage}

@@ -1,0 +1,19 @@
+% !TeX spellcheck = en_US
+
+\section{Conceptual Design}
+
+\subsection{Fact description:}
+
+The dimensions are defined, as: Student, Date, State, and Event. The Events fact has no descriptive attributes, it only contains the surrogate keys of all the dimensions.
+As for the structure of our fact schema and the logic behind it there was no need to include any advanced concepts such as multiple arcs, convergences or a shared hierarchy. 
+
+
+\subsection{Fact schema:}
+
+\begin{center}
+	\input{factschema.tex}
+\end{center}
+
+\subsection{Bus Matrix}
+	
+Having only one business process there would be no use of a Bus Matrix because all of our dimensions are exclusively used by that one business process.

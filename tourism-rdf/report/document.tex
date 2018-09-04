@@ -1,0 +1,97 @@
+% !TeX spellcheck = en_US
+% This template is a derived work from "LaTeX Example: Project Report: http://www.howtotex.com"
+
+\documentclass[paper=a4, fontsize=11pt, titlepage]{scrartcl}
+\usepackage[T1]{fontenc}
+\usepackage{fourier}
+\usepackage{courier}
+\usepackage[english]{babel}	
+\usepackage[protrusion=true,expansion=true]{microtype}	
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage[pdftex]{graphicx}
+\usepackage[hyphens]{url}
+\usepackage{rotating}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{shapes,calc}
+\usepackage{float}
+\usepackage{multirow}
+\usepackage{csvsimple}
+\usepackage{pgfplotstable}
+\usepackage[toc]{appendix}
+\usepackage{MnSymbol}
+\usepackage{verbatim}
+
+\bibliographystyle{alpha}
+ 
+% Custom sectioning
+\usepackage{sectsty}
+\allsectionsfont{\centering \normalfont\scshape}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+
+\setlength{\headheight}{13.6pt}
+
+% Default source code style
+\lstset{numbers=left,backgroundcolor=\color{lightgray},numbersep=5pt}
+\lstset{numberstyle=\scriptsize,columns=fullflexible}
+\lstset{basicstyle=\ttfamily\scriptsize,emphstyle=\bfseries}
+\lstset{breakatwhitespace=true,breaklines=true,captionpos=b,tabsize=2}
+
+% Removing UTF8 BOM with literate
+\lstset{literate={ï}{}0
+    	     	 {»}{}0
+             	 {¿}{}0 }
+
+% Nicer looking line breaks for too long lines
+\lstset{prebreak=\raisebox{0ex}[0ex][0ex]
+        {\ensuremath{\rhookswarrow}}}
+\lstset{postbreak=\raisebox{0ex}[0ex][0ex]
+        {\ensuremath{\rcurvearrowse\space}}}
+
+% Extending SQL syntax highlighting
+\lstset{language=SQL}
+\lstset{otherkeywords={BIGSERIAL,IF,REFERENCES,BIGINT,REAL,BOOLEAN,WITH,REPLACE,FUNCTION,RETURNS,AGGREGATE,OFFSET,GREATEST,IMMUTABLE,MOD,CEIL,SFUNC,STYPE,FINALFUNC,INITCOND,OVER,WINDOW,PARTITION,WINDOW,PRECEDING}, commentstyle=\tiny\textit}
+
+%%% Equation and float numbering
+\numberwithin{equation}{section}		% Equationnumbering: section.eq#
+\numberwithin{figure}{section}			% Figurenumbering: section.fig#
+\numberwithin{table}{section}			% Tablenumbering: section.tab#
+
+% Horizontal rule
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+% New command: footnote reference, to point to an existing footnote
+\makeatletter
+\newcommand\footnoteref[1]{\protected@xdef\@thefnmark{\ref{#1}}\@footnotemark}
+\makeatother
+
+\begin{document}
+
+	\input{title.tex}
+
+	\tableofcontents
+	\listoffigures
+	
+	\newpage
+	
+	\input{domainanalysis.tex}
+	\input{architecture.tex}
+	\input{semantictechniques.tex}
+	\input{implementation.tex}
+	\input{conclusion.tex}
+
+%	\newpage
+%	\appendix
+%	\section{Appendix: Listings}
+%	\label{app:listings}	
+%	\lstinputlisting[
+%		caption={SPARQL queries generated with Protege.},
+%		label={lst:sparql}, 
+%		language=SPARQL]
+%		{../ontology/tourism_v2.q}
+
+\end{document}
