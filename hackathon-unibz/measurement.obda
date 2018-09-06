@@ -1,0 +1,55 @@
+[PrefixDeclaration]
+:		http://example.org/idm/hack/measurement#
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+xml:		http://www.w3.org/XML/1998/namespace
+xsd:		http://www.w3.org/2001/XMLSchema#
+obda:		https://w3id.org/obda/vocabulary#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+
+[MappingDeclaration] @collection [[
+mappingId	TrafficSensor
+target		:data/observedObject/{id} a :TrafficSensor . 
+source		SELECT *
+			FROM intime.station
+			WHERE stationtype = 'TrafficSensor'
+
+mappingId	ObservedObject
+target		:data/observedObject/{id} a :ObservedObject ; :hasName {name} . 
+source		SELECT *
+			FROM intime.station
+
+mappingId	Municipality
+target		:data/observedObject/{id} :hasMunicipality {municipality} . 
+source		SELECT *
+			FROM intime.station
+			WHERE municipality <> ''
+
+mappingId	hasMeasurement
+target		:data/observedObject/{station_id} :hasMeasurement :data/measurement/{id} . 
+source		SELECT * FROM intime.measurement
+
+mappingId	Measurement
+target		:data/measurement/{id} :hasTimestamp {timestamp}^^xsd:dateTimeStamp ; :hasValue {value}^^xsd:double ; :hasMeasurementType :data/measurementType/{type_id} . 
+source		SELECT * FROM intime.measurement
+
+mappingId	MeasurementType
+target		:data/measurementType/{id} a :MeasurementType ; :hasUnit {cunit} ; :hasName {cname} . 
+source		SELECT * FROM intime.type
+
+mappingId	MeanMeasurementType
+target		:data/measurementType/{id} a :MeanMeasurementType . 
+source		SELECT * FROM intime.type
+			WHERE rtype = 'Mean' OR rtype = 'Mittelwerte'
+
+mappingId	InstantMeasurementType
+target		:data/measurementType/{id} a :InstantaneousMeasurementType . 
+source		SELECT * FROM intime.type
+			WHERE rtype = 'Momentanwerte' OR rtype = 'Instantaneous'
+
+mappingId	hasAirQualityAlert
+target		:data/measurement/{id} :hasAirQualityAlert "true"^^xsd:boolean . 
+source		SELECT m.id AS id FROM intime.type t, intime.measurement m
+			WHERE t.cname = 'NOX_mean' AND t.id = m.type_id AND m.value > 25
+]]
+
