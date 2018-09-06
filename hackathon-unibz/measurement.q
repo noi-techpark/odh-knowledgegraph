@@ -35,7 +35,7 @@ PREFIX obda: <https://w3id.org/obda/vocabulary#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 SELECT ?sensorName ?v ?ts {
- ?s a :TrafficSensor ; :hasName ?sensorName ; :hasMeasurement ?m .
+ ?s :hasName ?sensorName ; :hasMeasurement ?m .
  ?m :hasValue ?v ; :hasTimestamp ?ts ; :hasMeasurementType ?t .
  ?t a :MeanMeasurementType .
 }
@@ -50,9 +50,9 @@ PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX obda: <https://w3id.org/obda/vocabulary#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-SELECT ?townName ?ts WHERE {
+SELECT * WHERE {
   ?s :hasMeasurement ?m .
   ?m :hasAirQualityAlert true ; :hasTimestamp ?ts .
-  ?s :hasMunicipality ?townName .
+  OPTIONAL { ?s :hasMunicipality ?townName . }
 
 }

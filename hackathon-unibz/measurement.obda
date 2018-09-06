@@ -26,11 +26,11 @@ source		SELECT *
 			WHERE municipality <> ''
 
 mappingId	hasMeasurement
-target		:data/observedObject/{station_id} :hasMeasurement :data/measurement/{id} . 
+target		:data/observedObject/{station_id} :hasMeasurement :data/measurement/{period}/{station_id}/{type_id} . 
 source		SELECT * FROM intime.measurement
 
 mappingId	Measurement
-target		:data/measurement/{id} :hasTimestamp {timestamp}^^xsd:dateTimeStamp ; :hasValue {value}^^xsd:double ; :hasMeasurementType :data/measurementType/{type_id} . 
+target		:data/measurement/{period}/{station_id}/{type_id} :hasTimestamp {timestamp}^^xsd:dateTimeStamp ; :hasValue {value}^^xsd:double ; :hasMeasurementType :data/measurementType/{type_id} . 
 source		SELECT * FROM intime.measurement
 
 mappingId	MeasurementType
@@ -48,8 +48,8 @@ source		SELECT * FROM intime.type
 			WHERE rtype = 'Momentanwerte' OR rtype = 'Instantaneous'
 
 mappingId	hasAirQualityAlert
-target		:data/measurement/{id} :hasAirQualityAlert "true"^^xsd:boolean . 
-source		SELECT m.id AS id FROM intime.type t, intime.measurement m
+target		:data/measurement/{period}/{station_id}/{type_id} :hasAirQualityAlert "true"^^xsd:boolean . 
+source		SELECT m.station_id AS station_id, m.period as period, m.type_id as type_id  FROM intime.type t, intime.measurement m
 			WHERE t.cname = 'NOX_mean' AND t.id = m.type_id AND m.value > 25
 ]]
 
