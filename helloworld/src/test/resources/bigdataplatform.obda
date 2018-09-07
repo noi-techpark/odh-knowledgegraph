@@ -1,0 +1,23 @@
+[PrefixDeclaration]
+:		http://www.opendatahub.bz.it/ontologies/bdp#
+owl:		http://www.w3.org/2002/07/owl#
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+xml:		http://www.w3.org/XML/1998/namespace
+xsd:		http://www.w3.org/2001/XMLSchema#
+obda:		https://w3id.org/obda/vocabulary#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+
+[MappingDeclaration] @collection [[
+mappingId	Station (all)
+target		:station{id} a :Station ; :stationName {name} ; :stationType {stationtype} . 
+source		select id, name, stationtype from intime.station;
+
+mappingId	Station (Carsharing)
+target		:station{id} a :CarsharingStation ; :stationName {name} ; :stationType {stationtype} . 
+source		select id, name, stationtype from intime.station where stationtype = 'Carsharingcar';
+
+mappingId	Station (Meteo)
+target		:station{id} a :MeteoStation ; :stationName {name} ; :stationType {stationtype} . 
+source		select id, name, stationtype from intime.station where stationtype = 'Meteostation';
+]]
+

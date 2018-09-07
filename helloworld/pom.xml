@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>it.bz.odh.knowledgegraph</groupId>
+  <artifactId>helloworld</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>odh-knowledgegraph-helloworld</name>
+  
+  	<dependencies>
+		<dependency>
+			<groupId>it.unibz.inf.ontop</groupId>
+			<artifactId>ontop-quest-owlapi3</artifactId>
+			<version>1.16.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.5</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.rdf4j</groupId>
+			<artifactId>rdf4j-repository-sparql</artifactId>
+			<version>2.4.0-M3</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+    	<dependency>
+    		<groupId>org.eclipse.rdf4j</groupId>
+    		<artifactId>rdf4j-runtime</artifactId>
+    		<version>2.4.0-M3</version>
+    	</dependency>
+	</dependencies>
+  
+</project>
