@@ -3,7 +3,7 @@
 # Get all stations with their name and type 
 #
 
-prefix : <http://www.opendatahub.bz.it/ontologies/bdp#>
+prefix : <http://www.opendatahub.com/ontologies/bdp#>
 
 select * where {
 	?station	a		:Station ;
@@ -16,7 +16,7 @@ select * where {
 # Get meteo stations with their name
 #
 
-prefix : <http://www.opendatahub.bz.it/ontologies/bdp#>
+prefix : <http://www.opendatahub.com/ontologies/bdp#>
 
 select * where {
 	?station	a		:MeteoStation ;
