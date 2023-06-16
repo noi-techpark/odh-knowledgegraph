@@ -45,25 +45,25 @@
     
 
 
-    <!-- http://www.opendatahub.bz.it/ontologies/bdp#CarsharingStation -->
+    <!-- http://www.opendatahub.com/ontologies/bdp#CarsharingStation -->
 
-    <owl:Class rdf:about="http://www.opendatahub.bz.it/ontologies/bdp#CarsharingStation">
-        <rdfs:subClassOf rdf:resource="http://www.opendatahub.bz.it/ontologies/bdp#Station"/>
+    <owl:Class rdf:about="http://www.opendatahub.com/ontologies/bdp#CarsharingStation">
+        <rdfs:subClassOf rdf:resource="http://www.opendatahub.com/ontologies/bdp#Station"/>
     </owl:Class>
     
 
 
-    <!-- http://www.opendatahub.bz.it/ontologies/bdp#MeteoStation -->
+    <!-- http://www.opendatahub.com/ontologies/bdp#MeteoStation -->
 
-    <owl:Class rdf:about="http://www.opendatahub.bz.it/ontologies/bdp#MeteoStation">
-        <rdfs:subClassOf rdf:resource="http://www.opendatahub.bz.it/ontologies/bdp#Station"/>
+    <owl:Class rdf:about="http://www.opendatahub.com/ontologies/bdp#MeteoStation">
+        <rdfs:subClassOf rdf:resource="http://www.opendatahub.com/ontologies/bdp#Station"/>
     </owl:Class>
     
 
 
-    <!-- http://www.opendatahub.bz.it/ontologies/bdp#Station -->
+    <!-- http://www.opendatahub.com/ontologies/bdp#Station -->
 
-    <owl:Class rdf:about="http://www.opendatahub.bz.it/ontologies/bdp#Station"/>
+    <owl:Class rdf:about="http://www.opendatahub.com/ontologies/bdp#Station"/>
 </rdf:RDF>
 
 
